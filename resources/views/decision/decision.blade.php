@@ -4,7 +4,6 @@
 {{$decision->process_number}}
 @endsection
 
-
 @section('meta')
     <meta property="og:title" content="{{$decision->process_number}}">
     <meta name="description" content="{{$decision->summary}}">
@@ -52,6 +51,18 @@
                             {!!nl2br($decision->full_text)!!}
                         </div>
 
+                        <hr class="my-5">
+
+                        <!-- Form to ask a question -->
+                        <form action="{{ route('ask-question', $decision->id) }}" method="POST">
+                            @csrf
+                            <div class="form-group">
+                                <label for="question">Ask a question:</label>
+                                <input type="text" id="question" name="question" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
                     </div>
                 </div>
                 @include('decision.sidebar')
@@ -60,12 +71,9 @@
     </main>
 @endsection
 
-
-
 @section('css')
     <link rel='stylesheet' href='{{asset('css/bootstrap-select.min.css')}}' />
 @endsection
-
 
 @section('js')
 <script src='{{asset('js/flatpickr.min.js')}}'></script>

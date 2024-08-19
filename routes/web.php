@@ -3,6 +3,9 @@
 use App\Http\Controllers\CourtDecisionsController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DecisionController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/hello', function () {
+    return 'أهلا بالعالم';
+});
+
+
+Route::get('/decisions/{id}', [DecisionController::class, 'show']);
+
+Route::post('/decisions/{id}/ask', [DecisionController::class, 'askQuestion'])->name('ask-question');
+
+Route::get('/decisions/{id}', [DecisionController::class, 'show'])->name('decisions.show');
+
+
 
 
 
